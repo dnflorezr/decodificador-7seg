@@ -1,0 +1,79 @@
+===========================================================================
+1) Script original del curso (sevensegdec.py) - MyHDL 0.11.52, Python 3.13
+===========================================================================
+
+$ pip install myhdl
+...
+Successfully installed myhdl-0.11.52
+
+$ python sevensegdec.py --table tabla.txt --simulation
+<class 'myhdl.StopSimulation'>: No more events
+Simulation done.
+Conversion done (VHDL).
+
+    -> genera: sevensegdec_tb.vcd, sevensegdec_nexys.vhd, pck_myhdl_011.vhd
+
+$ python sevensegdec.py --table tabla.txt --simulation --verilog
+<class 'myhdl.StopSimulation'>: No more events
+Simulation done.
+Conversion done (verilog).
+
+    -> genera: sevensegdec_tb.vcd, sevensegdec_nexys.v, tb_sevensegdec_nexys.v
+
+Nota: con un solo guion (-table, -verilog) argparse no reconoce las opciones:
+$ python sevensegdec.py -table tabla.txt -verilog
+usage: sevensegdec.py [-h] [--simulation] [--invert] [--verilog]
+                      [--table TABLE]
+sevensegdec.py: error: unrecognized arguments: -table tabla.txt -verilog
+
+
+===========================================================================
+2) Versión modificada (pruebas_unitarias/sevensegdec_mod.py)
+===========================================================================
+
+$ python pruebas_unitarias/sevensegdec_mod.py --table tabla.txt --simulation
+t= 10 ns  bcd= 0 (0000)  sseg(abcdefg)=1111110
+t= 20 ns  bcd= 1 (0001)  sseg(abcdefg)=0110000
+t= 30 ns  bcd= 2 (0010)  sseg(abcdefg)=1101101
+t= 40 ns  bcd= 3 (0011)  sseg(abcdefg)=1111001
+t= 50 ns  bcd= 4 (0100)  sseg(abcdefg)=0110011
+t= 60 ns  bcd= 5 (0101)  sseg(abcdefg)=1011011
+t= 70 ns  bcd= 6 (0110)  sseg(abcdefg)=1011111
+t= 80 ns  bcd= 7 (0111)  sseg(abcdefg)=1110000
+t= 90 ns  bcd= 8 (1000)  sseg(abcdefg)=1111111
+t=100 ns  bcd= 9 (1001)  sseg(abcdefg)=1111011
+t=110 ns  bcd=10 (1010)  sseg(abcdefg)=0010001
+t=120 ns  bcd=11 (1011)  sseg(abcdefg)=1110110
+t=130 ns  bcd=12 (1100)  sseg(abcdefg)=0111110
+t=140 ns  bcd=13 (1101)  sseg(abcdefg)=0001000
+t=150 ns  bcd=14 (1110)  sseg(abcdefg)=0000001
+t=160 ns  bcd=15 (1111)  sseg(abcdefg)=1000000
+Simulation done.
+Conversion done (VHDL).
+
+$ python -m pytest pruebas_unitarias
+..................................................................       [100%]
+66 passed
+
+
+===========================================================================
+3) Experimentos con el script original (ver README, sección 3.3)
+===========================================================================
+
+$ python sevensegdec.py --table tabla.txt --simulation --invert
+ERROR: on (10) bcd input '0': expected differ 1111110 != 0000001
+ERROR: on (20) bcd input '1': expected differ 0110000 != 1001111
+ERROR: on (30) bcd input '2': expected differ 1101101 != 0010010
+...                                   (16 líneas de ERROR en total)
+ERROR: on (150) bcd input 'e': expected differ 0000001 != 1111110
+ERROR: on (160) bcd input 'f': expected differ 1000000 != 0111111
+<class 'myhdl.StopSimulation'>: No more events
+Simulation done.
+Conversion done (VHDL).
+
+$ python sevensegdec.py --table tabla_con_linea_en_blanco.txt --simulation
+Exception reading the table: invalid literal for int() with base 2: '\n'
+<class 'myhdl.StopSimulation'>: No more events
+Simulation done.
+Conversion done (VHDL).
+    -> ¡sin ningún ERROR, pero el VHDL generado tiene los 16 casos en "0000000"!

@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+
+# Archivos que generan los comandos al ejecutarlos en la raíz
+# (las versiones entregadas están en hdl/ y simulacion/)
+/*.vhd
+/*.v
+/*.vcd
