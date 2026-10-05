@@ -202,7 +202,7 @@ eso las pruebas de la sección 5 comparan contra una especificación escrita apa
 
 ### 3.3 Cuándo sí aparece ERROR (experimentos)
 
-Para confirmar la explicación anterior probé el script original con entradas que rompen esa
+Para confirmar la explicación anterior probamos el script original con entradas que rompen esa
 consistencia:
 
 | Experimento | Resultado |
