@@ -233,7 +233,9 @@ activos en bajo, como el de la tarjeta Nexys4 DDR. El punto decimal (DP) no est√
 
 ![Formas de onda de sevensegdec_tb.vcd](img/ondas_vcd.svg)
 
-![alt text](<img gtkwave-1.png>)
+git mv "img gtkwave.png" img/gtkwave.png
+
+![Captura en GTKWave](img/gtkwave.png)
 
 *Figura generada a partir de [`simulacion/sevensegdec_tb.vcd`](simulacion/sevensegdec_tb.vcd) con
 [`herramientas/generar_figuras.py`](herramientas/generar_figuras.py), con la misma disposici√≥n
